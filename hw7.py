@@ -2,7 +2,6 @@ passwd = open("/etc/passwd", "r")
 group = open("/etc/group", "r")
 output = open("output.txt", "w")
 
-
 console_count = {}
 groups = {}
 gid_to_gname = {}
@@ -20,9 +19,11 @@ for line in passwd.readlines():
     console_count[console] = console_count.get(console, 0) + 1
 
     # может такое быть что в /etc/passwd указана группа а в /etc/group - нет
-    already_added_users = groups.get(gid_to_gname[gid], [])
-    if name not in already_added_users:
-        groups[gid_to_gname[gid]] = groups.get(gid_to_gname[gid], []) + [name]
+    # already_added_users = groups.get(gid_to_gname[gid], [])
+    # if name not in already_added_users:
+    #     groups[gid_to_gname[gid]] = groups.get(gid_to_gname[gid], []) + [name]
+    if name not in groups[gid_to_gname[gid]]:
+        groups[gid_to_gname[gid]].append(name)
 
 output.write("Task #1\n\n")
 for cons in console_count:
