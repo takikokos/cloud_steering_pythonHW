@@ -1,10 +1,6 @@
 def bin_polinomic(dec_str):
     bin_str = str(bin(int(dec_str)))[2:]
-    mid = len(bin_str) + 1
-    if bin_str[:mid] == bin_str[mid::-1]:
-        return True
-    else:
-        return False
+    return bin_str == bin_str[::-1]
 
 def sum_polynoms(poly_length):
     if poly_length == 1:
@@ -30,5 +26,5 @@ res = 0
 
 for i in range(1, 7):
     res += sum_polynoms(i)
-    
+
 print(res)
