@@ -32,3 +32,17 @@ output.write("\nTask #2\n\n")
 for gr in groups:
     for i in range(len(groups[gr])): groups[gr][i] = uname_to_uid[groups[gr][i]] # write uids not names
     output.write(f"{gr} : {' , '.join(groups[gr])}\n")
+
+passwd.close()
+group.close()
+output.close()
+
+# vagrant@ubuntu-bionic:~$ grep rasul /etc/group
+# rasul:x:1016:ubuntu
+# vagrant@ubuntu-bionic:~$ grep ubuntu output.txt 
+# ubuntu : 1001
+# vagrant@ubuntu-bionic:~$ grep rasul output.txt 
+# rasul : 1001 , 1011
+# vagrant@ubuntu-bionic:~$ grep rasul /etc/passwd
+# rasul:x:1011:1016:Best User:/home/rasul:/bin/bash
+# vagrant@ubuntu-bionic:~$
