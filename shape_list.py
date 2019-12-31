@@ -1,13 +1,12 @@
 class ShapedList(list):
-    def __init__(self, shape : list, default_value=None, *args, **kwargs):
+    def __init__(self, shape : list, default_value=None):
         super().__init__()
-        smallest_el = [default_value for i in range(shape[-1])]
-        dims = list(shape[:-1])
-        for dim_size in dims[::-1]:
-            self.clear()
-            for _ in range(dim_size):
-                self.append(smallest_el.copy())
-            smallest_el = self.copy()
+        if len(shape) == 1:
+            for _ in range(shape[0]):
+                self.append(default_value)
+            return
+        for _ in range(shape[0]):
+            self.append(ShapedList(shape[1:], default_value))
 
     def get_shape(self):
         '''
@@ -22,7 +21,7 @@ class ShapedList(list):
 
 
 if __name__ == "__main__":
-    sh = (3, 2, 2, 1, 4)
-    l = ShapedList(shape=sh, default_value=0.)
-    
+    sh = (2, 1, 3, 4, 2)
+    l = ShapedList(shape=sh, default_value=0)
+    print(l)
     print(l.get_shape())
