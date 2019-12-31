@@ -14,7 +14,7 @@ class ShapedList(list):
         '''
         try:
             res = [len(self)]
-        except TypeError:
+        except TypeError: # if it was called on non-iterable object
             return []
         res += ShapedList.get_shape(self[0])
         return res
