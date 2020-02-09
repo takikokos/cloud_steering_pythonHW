@@ -28,9 +28,11 @@ if __name__ == "__main__":
         # print(ExifTags.GPSTAGS) # exif tags docs
         exif_data = img._getexif()
         if exif_data != None:
-            exif_data = list(exif_data.items())[0][1]
-            latitude = convert_to_degress(exif_data[2])
-            longitude = convert_to_degress(exif_data[4])
+            # exif_data = list(exif_data.items())[0][1]
+            exif = { ExifTags.TAGS[k]: v for k, v in img._getexif().items() if k in ExifTags.TAGS }
+            gps_info = exif["GPSInfo"]
+            latitude = convert_to_degress(gps_info[2])
+            longitude = convert_to_degress(gps_info[4])
 
             with open(".coords.txt", "w") as out_f:
                 out_f.write(f"{latitude};{longitude}")
